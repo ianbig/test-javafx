@@ -9,11 +9,12 @@
 plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
     id 'application'
-    id 'org.openjfx.javafxplugin' version '0.0.9'
+    id 'org.openjfx.javafxplugin' version '0.0.11'
 
 }
+
 javafx {
-    version = "15.0.1"
+    version = "18"
     modules = [ 'javafx.controls', 'javafx.fxml'  ]
 }
 
@@ -49,6 +50,7 @@ tasks.named('test') {
     // Use JUnit Platform for unit tests.
     useJUnitPlatform()
 }
+
 test {
     testLogging {
         showStandardStreams = true
@@ -58,6 +60,7 @@ test {
     //systemProperty "testfx.robot", "glass"
 
 }
+
 clover {
     compiler {
         additionalArgs = '-g:lines,source,vars'
