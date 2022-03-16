@@ -1,0 +1,21 @@
+.expandable {
+    -fx-max-width: infinity;
+    -fx-max-height: infinity;
+    -fx-background-color: black;
+    -fx-text-fill: ivory;
+    -fx-background-radius: 10, 10;
+    -fx-brackgroun-insets: 2, 5;
+}
+
+.expandable:hover {
+    -fx-background-color: #333355, #101169;
+
+}
+
+.expandable:press {
+    -fx-background-color: #000029, #000149;
+    -fx-text-fill: ivory;
+    -fx-background-radius: 10, 10;
+    -fx-background-insets: 2, 5;
+
+}

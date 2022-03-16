@@ -3,14 +3,16 @@
  */
 package edu.duke.ece651.calc;
 
+import java.io.IOException;
+import java.net.URL;
+
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 public class App extends Application {
@@ -56,10 +58,19 @@ public class App extends Application {
 
   @Override
   public void start(Stage stage) {
-    GridPane gp = CreateGrid();
-    Scene s = new Scene(gp, 640, 480);
-    stage.setScene(s);
-    stage.show();
+    URL xmlResources = getClass().getResource("/ui/calcbuttons.xml");
+    URL cssResources = getClass().getResource("/ui/calcbuttons.css");
+    try {
+      GridPane gp = FXMLLoader.load(xmlResources);
+      Scene s = new Scene(gp, 640, 480);
+      s.getStylesheets().add(cssResources.toString());
+      stage.setScene(s);
+      stage.show();
+    }
+
+    catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 
   public static void main(String[] args) {
