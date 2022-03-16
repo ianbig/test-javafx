@@ -7,36 +7,51 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 public class App extends Application {
   public GridPane CreateGrid() {
     GridPane gp = new GridPane();
-    String [] labels = new String[] {"+", "-", "*", "/",
-      "7", "8", "9",
-      "4", "5", "6",
-      "1", "2", "3",
-      "."};
-    int rows[] = new int[] { 0, 0, 0, 0,
-      1, 1, 1,
-      2, 2, 2,
-      3, 3, 3,
-      4};
-    int cols[] = new int[] {0, 1, 2, 3,
-      0, 1, 2,
-      0, 1, 2,
-      0, 1, 2,
-      2};
+    String[] labels = new String[] { "+", "-", "*", "/", "7", "8", "9", "4", "5", "6", "1", "2", "3", "." };
+    int rows[] = new int[] { 0, 0, 0, 0, 1, 1, 1, 2, 2, 2, 3, 3, 3, 4 };
+    int cols[] = new int[] { 0, 1, 2, 3, 0, 1, 2, 0, 1, 2, 0, 1, 2, 2 };
 
     for (int i = 0; i < labels.length; i++) {
-      gp.add(new Button(labels[i]), cols[i], rows[i]);
+      Button b = createButton(labels[i]);
+      gp.add(b, cols[i], rows[i]);
     }
 
-    gp.add(new Button("0"), 0, 4, 2, 1);
-    gp.add(new Button("E\nn\nt\ne\nr"), 3, 1, 1, 3);
+    Button b = createButton("0");
+    gp.add(b, 0, 4, 2, 1);
+
+    b = createButton("E\nn\nt\ne\nr");
+    gp.add(b, 3, 1, 1, 3);
+
+    // set column constraint
+    for (int i = 0; i < 4; i++) {
+      ColumnConstraints cc = new ColumnConstraints();
+      cc.setPercentWidth(25);
+      gp.getColumnConstraints().add(cc);
+    }
+    // set row constraint
+    for (int i = 0; i < 5; i++) {
+      RowConstraints rc = new RowConstraints();
+      rc.setPercentHeight(20);
+      gp.getRowConstraints().add(rc);
+    }
+
     return gp;
+  }
+
+  private Button createButton(String label) {
+    Button b = new Button(label);
+    b.setMaxWidth(Double.MAX_VALUE);
+    b.setMaxHeight(Double.MAX_VALUE);
+    return b;
   }
 
   @Override
