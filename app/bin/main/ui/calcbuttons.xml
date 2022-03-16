@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import java.lang.Double?>
 
-<GridPane xmlns:fx="http://javafx.com/fxml">
+<GridPane xmlns:fx="http://javafx.com/fxml" fx:controller="edu.duke.ece651.calc.controller.NumButtonController">
   <columnConstraints>
     <ColumnConstraints percentWidth="60" />
     <ColumnConstraints percentWidth="20" />
@@ -32,22 +32,22 @@
       <RowConstraints percentHeight="20" />
       <RowConstraints percentHeight="20" />
     </rowConstraints>
-    <Button text="+" GridPane.rowIndex="0" GridPane.columnIndex="0" styleClass="expandable" />
-    <Button text="-" fx:id="minus" GridPane.rowIndex="0" GridPane.columnIndex="1" styleClass="expandable" />
-    <Button text="*" fx:id="times" GridPane.rowIndex="0" GridPane.columnIndex="2" styleClass="expandable" />
-    <Button text="/" fx:id="div" GridPane.rowIndex="0" GridPane.columnIndex="3" styleClass="expandable" />
-    <Button text="7" GridPane.rowIndex="1" GridPane.columnIndex="0" styleClass="expandable" />
-    <Button text="8" GridPane.rowIndex="1" GridPane.columnIndex="1" styleClass="expandable" />
-    <Button text="9" GridPane.rowIndex="1" GridPane.columnIndex="2" styleClass="expandable" />
-    <Button text="${'E\nn\nt\ne\nr\n'}" GridPane.rowIndex="1" GridPane.columnIndex="3" styleClass="expandable" GridPane.rowSpan="3" />
-    <Button text="4" GridPane.rowIndex="2" GridPane.columnIndex="0" styleClass="expandable" />
-    <Button text="5" GridPane.rowIndex="2" GridPane.columnIndex="1" styleClass="expandable" />
-    <Button text="6" GridPane.rowIndex="2" GridPane.columnIndex="2" styleClass="expandable" />
-    <Button text="1" GridPane.rowIndex="3" GridPane.columnIndex="0" styleClass="expandable" />
-    <Button text="2" GridPane.rowIndex="3" GridPane.columnIndex="1" styleClass="expandable" />
-    <Button text="3" GridPane.rowIndex="3" GridPane.columnIndex="2" styleClass="expandable" />
-    <Button text="0" GridPane.rowIndex="4" GridPane.columnIndex="0" styleClass="expandable" GridPane.columnSpan="2" />
-    <Button text="." fx:id="dot" GridPane.rowIndex="4" GridPane.columnIndex="2" styleClass="expandable" />
+    <Button text="+" GridPane.rowIndex="0" GridPane.columnIndex="0" styleClass="expandable" onAction="#onNumberButton"/>
+    <Button text="-" fx:id="minus" GridPane.rowIndex="0" GridPane.columnIndex="1" styleClass="expandable" onAction="#onNumberButton"/>
+    <Button text="*" fx:id="times" GridPane.rowIndex="0" GridPane.columnIndex="2" styleClass="expandable" onAction="#onNumberButton"/>
+    <Button text="/" fx:id="div" GridPane.rowIndex="0" GridPane.columnIndex="3" styleClass="expandable" onAction="#onNumberButton"/>
+    <Button text="7" GridPane.rowIndex="1" GridPane.columnIndex="0" styleClass="expandable" onAction="#onNumberButton"/>
+    <Button text="8" GridPane.rowIndex="1" GridPane.columnIndex="1" styleClass="expandable" onAction="#onNumberButton"/>
+    <Button text="9" GridPane.rowIndex="1" GridPane.columnIndex="2" styleClass="expandable" onAction="#onNumberButton"/>
+    <Button text="${'E\nn\nt\ne\nr\n'}" GridPane.rowIndex="1" GridPane.columnIndex="3" styleClass="expandable" GridPane.rowSpan="3" onAction="#onNumberButton"/>
+    <Button text="4" GridPane.rowIndex="2" GridPane.columnIndex="0" styleClass="expandable" onAction="#onNumberButton"/>
+    <Button text="5" GridPane.rowIndex="2" GridPane.columnIndex="1" styleClass="expandable" onAction="#onNumberButton"/>
+    <Button text="6" GridPane.rowIndex="2" GridPane.columnIndex="2" styleClass="expandable" onAction="#onNumberButton"/>
+    <Button text="1" GridPane.rowIndex="3" GridPane.columnIndex="0" styleClass="expandable" onAction="#onNumberButton"/>
+    <Button text="2" GridPane.rowIndex="3" GridPane.columnIndex="1" styleClass="expandable" onAction="#onNumberButton"/>
+    <Button text="3" GridPane.rowIndex="3" GridPane.columnIndex="2" styleClass="expandable" onAction="#onNumberButton"/>
+    <Button text="0" GridPane.rowIndex="4" GridPane.columnIndex="0" styleClass="expandable" GridPane.columnSpan="2" onAction="#onNumberButton"/>
+    <Button text="." fx:id="dot" GridPane.rowIndex="4" GridPane.columnIndex="2" styleClass="expandable" onAction="#onNumberButton"/>
   </GridPane>
   <ListView fx:id="rpnstack" GridPane.rowIndex="0" GridPane.columnIndex="1" GridPane.columnSpan="2"/>
   <Label fx:id="numlabel" text="Current number: " GridPane.rowIndex="1" GridPane.columnIndex="1"/>
