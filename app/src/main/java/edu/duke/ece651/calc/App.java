@@ -5,18 +5,45 @@ package edu.duke.ece651.calc;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 public class App extends Application {
+  public GridPane CreateGrid() {
+    GridPane gp = new GridPane();
+    String [] labels = new String[] {"+", "-", "*", "/",
+      "7", "8", "9",
+      "4", "5", "6",
+      "1", "2", "3",
+      "."};
+    int rows[] = new int[] { 0, 0, 0, 0,
+      1, 1, 1,
+      2, 2, 2,
+      3, 3, 3,
+      4};
+    int cols[] = new int[] {0, 1, 2, 3,
+      0, 1, 2,
+      0, 1, 2,
+      0, 1, 2,
+      2};
+
+    for (int i = 0; i < labels.length; i++) {
+      gp.add(new Button(labels[i]), cols[i], rows[i]);
+    }
+
+    gp.add(new Button("0"), 0, 4, 2, 1);
+    gp.add(new Button("E\nn\nt\ne\nr"), 3, 1, 1, 3);
+    return gp;
+  }
+
   @Override
   public void start(Stage stage) {
-    String javaVersion = System.getProperty("java.version");
-    String javafxVersion = System.getProperty("javafx.version");
-    Label l = new Label("Hello, JavaFX " + javafxVersion + ", running on Java " + javaVersion + ".");
-    Scene scene = new Scene(new StackPane(l), 640, 480);
-    stage.setScene(scene);
+    GridPane gp = CreateGrid();
+    Scene s = new Scene(gp, 640, 480);
+    stage.setScene(s);
     stage.show();
   }
 
