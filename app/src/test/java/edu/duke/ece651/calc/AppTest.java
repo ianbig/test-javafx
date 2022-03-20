@@ -3,12 +3,40 @@
  */
 package edu.duke.ece651.calc;
 
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+import java.io.IOException;
 
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.testfx.api.FxAssert;
+import org.testfx.api.FxRobot;
+import org.testfx.framework.junit5.ApplicationExtension;
+import org.testfx.framework.junit5.Start;
+import org.testfx.matcher.control.TextInputControlMatchers;
+
+import javafx.stage.Stage;
+@ExtendWith(ApplicationExtension.class)
 class AppTest {
-    @Test void appHasAGreeting() {
-        App classUnderTest = new App();
-        // assertNotNull(classUnderTest.getGreeting(), "app should have a greeting");
+  App a;
+  @Start
+  public void start(Stage stage) throws IOException {
+    a = new App();
+    a.start(stage);
+  }
+
+  @Test
+  void test_numButtons(FxRobot robot) {
+    FxAssert.verifyThat("#currentNumber", TextInputControlMatchers.hasText(""));
+    String str = "123450.6789";
+    for (char digit : str.toCharArray()) {
+      if (digit == '.') {
+        robot.clickOn("#dot");
+      }
+
+      else {
+        robot.clickOn("" + digit);
+      }
     }
+    FxAssert.verifyThat("#currentNumber", TextInputControlMatchers.hasText(str));
+  }
 }

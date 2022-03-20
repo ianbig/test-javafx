@@ -5,7 +5,11 @@ package edu.duke.ece651.calc;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.HashMap;
 
+import edu.duke.ece651.calc.controller.CalculatorController;
+import edu.duke.ece651.calc.controller.NumButtonController;
+import edu.duke.ece651.calc.model.RPNStack;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -16,52 +20,20 @@ import javafx.scene.layout.RowConstraints;
 import javafx.stage.Stage;
 
 public class App extends Application {
-  public GridPane CreateGrid() {
-    GridPane gp = new GridPane();
-    String[] labels = new String[] { "+", "-", "*", "/", "7", "8", "9", "4", "5", "6", "1", "2", "3", "." };
-    int rows[] = new int[] { 0, 0, 0, 0, 1, 1, 1, 2, 2, 2, 3, 3, 3, 4 };
-    int cols[] = new int[] { 0, 1, 2, 3, 0, 1, 2, 0, 1, 2, 0, 1, 2, 2 };
-
-    for (int i = 0; i < labels.length; i++) {
-      Button b = createButton(labels[i]);
-      gp.add(b, cols[i], rows[i]);
-    }
-
-    Button b = createButton("0");
-    gp.add(b, 0, 4, 2, 1);
-
-    b = createButton("E\nn\nt\ne\nr");
-    gp.add(b, 3, 1, 1, 3);
-
-    // set column constraint
-    for (int i = 0; i < 4; i++) {
-      ColumnConstraints cc = new ColumnConstraints();
-      cc.setPercentWidth(25);
-      gp.getColumnConstraints().add(cc);
-    }
-    // set row constraint
-    for (int i = 0; i < 5; i++) {
-      RowConstraints rc = new RowConstraints();
-      rc.setPercentHeight(20);
-      gp.getRowConstraints().add(rc);
-    }
-
-    return gp;
-  }
-
-  private Button createButton(String label) {
-    Button b = new Button(label);
-    b.setMaxWidth(Double.MAX_VALUE);
-    b.setMaxHeight(Double.MAX_VALUE);
-    return b;
-  }
-
   @Override
   public void start(Stage stage) {
     URL xmlResources = getClass().getResource("/ui/calcbuttons.xml");
     URL cssResources = getClass().getResource("/ui/calcbuttons.css");
     try {
-      GridPane gp = FXMLLoader.load(xmlResources);
+      RPNStack model = new RPNStack();
+      FXMLLoader loader = new FXMLLoader(xmlResources);
+      HashMap<Class<?>, Object> controllers = new HashMap<>();
+      controllers.put(NumButtonController.class, new NumButtonController(model));
+      controllers.put(CalculatorController.class, new CalculatorController());
+      loader.setControllerFactory((c) -> {
+          return controllers.get(c);
+        });
+      GridPane gp = loader.load();
       Scene s = new Scene(gp, 640, 480);
       s.getStylesheets().add(cssResources.toString());
       stage.setScene(s);
